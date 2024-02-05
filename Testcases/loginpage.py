@@ -6,6 +6,7 @@ class loginpage:
     def openbrowser(self):
         driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         driver.get("https://www.hotmail.com")
+        driver.maximize_window()
 
     def browserclose():
         driver.quit()
