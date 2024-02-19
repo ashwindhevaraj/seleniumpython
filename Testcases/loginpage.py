@@ -30,6 +30,13 @@ class loginpage(unittest.TestCase):
         self.elem6=self.driver.find_elements(By.XPATH,"//div[@role='listbox']//div[@role='option']")
         for x in self.elem6:
             print(x.text)
+            if x.text=="Automaton Tester":
+                x.click()
+                break
+        
+        #self.elem7= self.elem6.find_element("//div[@text()='Account Assistant']")
+        #WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(elem7))
+        #self.elem7.click()
         self.assertIn("Aswin","Aswin")
                 
 
