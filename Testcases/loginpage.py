@@ -5,6 +5,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
+import time
 
 class loginpage(unittest.TestCase):
     def setUp(self):
@@ -33,11 +35,17 @@ class loginpage(unittest.TestCase):
             if x.text=="Automaton Tester":
                 x.click()
                 break
-        
-        #self.elem7= self.elem6.find_element("//div[@text()='Account Assistant']")
-        #WebDriverWait(self.driver,30).until(EC.visibility_of_element_located(elem7))
-        #self.elem7.click()
         self.assertIn("Aswin","Aswin")
+        self.elem7=self.driver.find_element(By.XPATH,"//span[text()='My Info']")
+        self.elem7.click()
+        self.elem8=self.driver.find_element(By.XPATH,"//a[text()='Personal Details']")
+        self.actionchains=ActionChains(self.driver)
+        self.elem9=self.driver.find_element(By.XPATH,"//label[text()='Other Id']//parent::div//following-sibling::div//input")
+        time.sleep(3)
+        self.actionchains.drag_and_drop(self.elem8,self.elem9).perform()
+        time.sleep(3)
+        
+
                 
 
     
