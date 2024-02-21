@@ -44,11 +44,18 @@ class loginpage(unittest.TestCase):
         time.sleep(3)
         self.actionchains.drag_and_drop(self.elem8,self.elem9).perform()
         time.sleep(3)
-        
-
-                
-
-    
+        self.driver.get("https://the-internet.herokuapp.com/")
+        self.framemenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/frames']")
+        self.framemenu.click()
+        self.iframemenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/iframe']")
+        self.iframemenu.click()
+        self.exactframe=self.driver.find_element(By.CSS_SELECTOR,"#mce_0_ifr")
+        self.driver.switch_to.frame(self.exactframe)
+        self.textarea1=self.driver.find_element(By.CSS_SELECTOR,"#tinymce>p")
+        self.textarea1.clear()
+        self.textarea1.send_keys("Aswin in Iframe")
+        self.driver.switch_to.default_content()
+        time.sleep(3)
     def tearDown(self):
         self.driver.quit()
 
