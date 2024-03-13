@@ -94,7 +94,14 @@ class loginpage(unittest.TestCase):
         self.alert.send_keys("Inside prompt")
         self.alert.accept()
         self.assertIn("You entered: Inside prompt",self.result_text.text)
-        time.sleep(3)
+        self.driver.back()
+
+        self.linktext1=self.driver.find_element(By.LINK_TEXT,"A/B Testing")
+        self.linktext1.click()
+        self.driver.back()
+        self.partiallink1=self.driver.find_element(By.PARTIAL_LINK_TEXT,"Add/Remove")
+        self.partiallink1.click()
+        self.driver.back()
 
     def tearDown(self):
         self.driver.quit()
