@@ -11,12 +11,13 @@ import time
 
 class loginpage(unittest.TestCase):
     def setUp(self):
-        self.driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        self.driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager(driver_version="122.0").install()))
+        self.wait=WebDriverWait(self.driver,30)
         
     def test_openbrowser(self):
         driver=self.driver
         #self.driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        self.driver.implicitly_wait(30)
+       #self.driver.implicitly_wait(30)
         """self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
         self.driver.maximize_window()
         self.elem1=self.driver.find_element(By.NAME,"username")
@@ -46,9 +47,12 @@ class loginpage(unittest.TestCase):
         self.actionchains.drag_and_drop(self.elem8,self.elem9).perform()
         time.sleep(3)"""
         self.driver.get("https://the-internet.herokuapp.com/")
+        self.wait.until(EC.title_is("The Internet"))
         self.framemenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/frames']")
+        self.wait.until(EC.element_to_be_clickable(self.framemenu))
         self.framemenu.click()
         self.iframemenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/iframe']")
+        self.wait.until(EC.element_to_be_clickable(self.iframemenu))
         self.iframemenu.click()
         self.exactframe=self.driver.find_element(By.CSS_SELECTOR,"#mce_0_ifr")
         self.driver.switch_to.frame(self.exactframe)
@@ -56,13 +60,14 @@ class loginpage(unittest.TestCase):
         self.textarea1.clear()
         self.textarea1.send_keys("Aswin in Iframe")
         self.driver.switch_to.default_content()
-        time.sleep(3)
         self.driver.back()
         self.driver.back()
 
         self.newtabelement=self.driver.find_element(By.CSS_SELECTOR,"a[href='/windows']")
+        self.wait.until(EC.element_to_be_clickable(self.newtabelement))
         self.newtabelement.click()
         self.newtablelement2=self.driver.find_element(By.CSS_SELECTOR,"[href='/windows/new']")
+        self.wait.until(EC.element_to_be_clickable(self.newtablelement2))
         self.newtablelement2.click()
         self.main_window_handle=driver.current_window_handle
         for handle in driver.window_handles:
@@ -73,8 +78,10 @@ class loginpage(unittest.TestCase):
         self.driver.back()
 
         self.alertmenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
+        self.wait.until(EC.element_to_be_clickable(self.alertmenu))
         self.alertmenu.click()
         self.JSalertbtn=self.driver.find_element(By.XPATH,"//button[text()='Click for JS Alert']")
+        self.wait.until(EC.element_to_be_clickable(self.JSalertbtn))
         self.JSalertbtn.click()
         #self.driver.switch_to.alert
         self.alert=Alert(self.driver)
@@ -97,9 +104,11 @@ class loginpage(unittest.TestCase):
         self.driver.back()
 
         self.linktext1=self.driver.find_element(By.LINK_TEXT,"A/B Testing")
+        self.wait.until(EC.element_to_be_clickable(self.linktext1))
         self.linktext1.click()
         self.driver.back()
         self.partiallink1=self.driver.find_element(By.PARTIAL_LINK_TEXT,"Add/Remove")
+        self.wait.until(EC.element_to_be_clickable(self.partiallink1))
         self.partiallink1.click()
         self.driver.back()
 
