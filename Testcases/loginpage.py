@@ -46,7 +46,7 @@ class loginpage(unittest.TestCase):
         time.sleep(3)
         self.actionchains.drag_and_drop(self.elem8,self.elem9).perform()
         time.sleep(3)"""
-        self.driver.get("https://the-internet.herokuapp.com/")
+        """ self.driver.get("https://the-internet.herokuapp.com/")
         self.wait.until(EC.title_is("The Internet"))
         self.framemenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/frames']")
         self.wait.until(EC.element_to_be_clickable(self.framemenu))
@@ -62,9 +62,9 @@ class loginpage(unittest.TestCase):
         self.textarea1.send_keys("Aswin in Iframe")
         self.driver.switch_to.default_content()
         self.driver.back()
-        self.driver.back()
+        self.driver.back() """
 
-        self.newtabelement=self.driver.find_element(By.CSS_SELECTOR,"a[href='/windows']")
+        """ self.newtabelement=self.driver.find_element(By.CSS_SELECTOR,"a[href='/windows']")
         self.wait.until(EC.element_to_be_clickable(self.newtabelement))
         self.newtabelement.click()
         self.newtablelement2=self.driver.find_element(By.CSS_SELECTOR,"[href='/windows/new']")
@@ -76,7 +76,7 @@ class loginpage(unittest.TestCase):
                 self.driver.switch_to.window(handle)
                 print(self.driver.title)
         self.driver.switch_to.window(self.main_window_handle)
-        self.driver.back()
+        self.driver.back() """
 
         self.alertmenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
         self.wait.until(EC.element_to_be_clickable(self.alertmenu))
