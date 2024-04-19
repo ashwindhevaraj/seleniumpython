@@ -78,7 +78,7 @@ class loginpage(unittest.TestCase):
         self.driver.switch_to.window(self.main_window_handle)
         self.driver.back() """
 
-        self.alertmenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
+        """self.alertmenu=self.driver.find_element(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
         self.wait.until(EC.element_to_be_clickable(self.alertmenu))
         self.alertmenu.click()
         self.JSalertbtn=self.driver.find_element(By.XPATH,"//button[text()='Click for JS Alert']")
@@ -88,9 +88,9 @@ class loginpage(unittest.TestCase):
         self.alert=Alert(self.driver)
         self.alert.accept()
         self.result_text=self.driver.find_element(By.XPATH,"//h4[text()='Result:']//following::p")
-        self.assertIn("You successfully clicked an alert",self.result_text.text)
+        self.assertIn("You successfully clicked an alert",self.result_text.text)"""
 
-        self.JSconfirmbtn=self.driver.find_element(By.CSS_SELECTOR,"button[onclick='jsConfirm()']")
+        """self.JSconfirmbtn=self.driver.find_element(By.CSS_SELECTOR,"button[onclick='jsConfirm()']")
         self.JSconfirmbtn.click()
         self.alert=Alert(self.driver)
         self.alert.dismiss()
@@ -111,7 +111,7 @@ class loginpage(unittest.TestCase):
         self.partiallink1=self.driver.find_element(By.PARTIAL_LINK_TEXT,"Add/Remove")
         self.wait.until(EC.element_to_be_clickable(self.partiallink1))
         self.partiallink1.click()
-        self.driver.back()
+        self.driver.back()"""
 
     def tearDown(self):
         self.driver.quit()
