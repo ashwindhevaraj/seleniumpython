@@ -47,4 +47,4 @@ class Test_baseclass:
         self.driver.back()
         self.driver.quit()
 
-        assert "pass"=="pass", "first test case written in pytest passed"
+        assert "pass"=="pass", "first test case written in pytest failed"
