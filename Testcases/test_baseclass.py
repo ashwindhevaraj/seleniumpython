@@ -18,7 +18,7 @@ class Test_baseclass:
         self.wait=WebDriverWait(self.driver,30)
         self.driver.get("https://the-internet.herokuapp.com/")
         self.wait.until(EC.title_is("The Internet"))
-        self.frameactionpage=frameactions_page(self.driver,self.wait)
+        self.frameactionpage=frameactions_page(self.driver)
         self.frameactionpage.click_framemenu()
         self.frameactionpage.click_iframemenu()
         self.frameactionpage.switch_to_frame()
