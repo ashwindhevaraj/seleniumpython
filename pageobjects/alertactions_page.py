@@ -2,54 +2,45 @@ from seleniumpagefactory.Pagefactory import PageFactory
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
+from pageobjects.basepage import basepage
 
-class alertactions_page:
-    def __init__(self,driver,wait):
-        self.driver=driver
-        self.wait=wait
-        self.alertmenu=(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
-        self.JSalertbtn=(By.XPATH,"//button[text()='Click for JS Alert']")
-        self.result_text=(By.XPATH,"//h4[text()='Result:']//following::p")
-        self.JSconfirmbtn=(By.CSS_SELECTOR,"button[onclick='jsConfirm()']")
-        self.JSpromptbtn=(By.CSS_SELECTOR,"button[onclick='jsPrompt()']")
+class alertactions_page(basepage):
+    alertmenu=(By.CSS_SELECTOR,"a[href='/javascript_alerts']")
+    JSalertbtn=(By.XPATH,"//button[text()='Click for JS Alert']")
+    result_text=(By.XPATH,"//h4[text()='Result:']//following::p")
+    JSconfirmbtn=(By.CSS_SELECTOR,"button[onclick='jsConfirm()']")
+    JSpromptbtn=(By.CSS_SELECTOR,"button[onclick='jsPrompt()']")
 
+    def __init__(self,driver):
+        super().__init__(driver)
 
     def click_alertmenu(self):
-        self.wait.until(EC.element_to_be_clickable(self.driver.find_element(*self.alertmenu)))
-        self.driver.find_element(*self.alertmenu).click()
+        self.click_element(self.alertmenu)
 
     def click_JSbutton(self):
-        self.wait.until(EC.element_to_be_clickable(self.driver.find_element(*self.JSalertbtn)))
-        self.driver.find_element(*self.JSalertbtn).click()
+        self.click_element(self.JSalertbtn)
 
-    def alert_object(self):
-        self.alert=Alert(self.driver)
-        return self.alert
-
-    def create_alert(self):
-        #self.alert=Alert(self.driver)
+    def accept_alert(self):
         self.alert=self.alert_object()
         self.alert.accept()
         
     def alerttext_comparison(self):
-        if "You successfully clicked an alert"==self.driver.find_element(*self.result_text).text:
+        if "You successfully clicked an alert"==self.get_text(self.result_text):
             print("text inside alert is true")
 
     def click_confirmbtn(self):
-        self.wait.until(EC.element_to_be_clickable(self.driver.find_element(*self.JSconfirmbtn)))
-        self.driver.find_element(*self.JSconfirmbtn).click()
+        self.click_element(self.JSconfirmbtn)
         self.alert=self.alert_object()
         self.alert.dismiss()
-        if "You clicked: Cancel"==self.driver.find_element(*self.result_text).text:
+        if "You clicked: Cancel"==self.get_text(self.result_text):
             print("Both texts are same from confirm button")
 
     def click_promptbutton(self):
-        self.wait.until(EC.element_to_be_clickable(self.driver.find_element(*self.JSpromptbtn)))
-        self.driver.find_element(*self.JSpromptbtn).click()
+        self.click_element(self.JSpromptbtn)
         self.alert=self.alert_object()
         self.alert.send_keys("Inside prompt")
         self.alert.accept()
-        if "You entered: Inside prompt"==self.driver.find_element(*self.result_text).text:
+        if "You entered: Inside prompt"==self.get_text(self.result_text):
             print("Both texts are same from prompt button of alert")
         
         

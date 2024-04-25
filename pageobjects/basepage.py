@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.alert import Alert
 
 class basepage:
     def __init__(self,driver):
@@ -29,7 +30,7 @@ class basepage:
     def navigate_to_url(self,url):
         self.driver.get(url)
 
-    def get_title(self,locator):
+    def get_title(self):
         return self.driver.title
     
     def switching_to_frame(self,locator,timeout=20):
@@ -38,3 +39,17 @@ class basepage:
 
     def switching_to_defaultcontent(self):
         self.driver.switch_to.default_content()
+
+    #creation of alert object and returning them    
+    def alert_object(self):
+        self.alert=Alert(self.driver)
+        return self.alert
+
+    #will switch to all windows one by one and printing title and switching back to main window    
+    def switch_to_all_windows(self):
+        self.main_window_handle=self.driver.current_window_handle
+        for self.handle in self.driver.window_handles:
+            if self.handle!=self.main_window_handle:
+                self.driver.switch_to.window(self.handle)
+                print(self.driver.title)
+        self.driver.switch_to.window(self.main_window_handle)
