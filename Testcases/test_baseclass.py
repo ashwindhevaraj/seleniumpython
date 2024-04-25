@@ -10,14 +10,18 @@ from pageobjects.frameactions_page import frameactions_page
 from pageobjects.windowhandlepage import windowhandlepage
 from pageobjects.alertactions_page import alertactions_page
 from pageobjects.linktext_page import linktext_page
+from pageobjects.basepage import basepage
 
 
 class Test_baseclass:
     def test_frame(self):
         self.driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager(driver_version="124.0").install()))
-        self.wait=WebDriverWait(self.driver,30)
-        self.driver.get("https://the-internet.herokuapp.com/")
-        self.wait.until(EC.title_is("The Internet"))
+        self.basepagenew=basepage(self.driver)
+        self.basepagenew.navigate_to_url("https://the-internet.herokuapp.com/")
+        self.driver.maximize_window()
+        if self.basepagenew.get_title()=="The Internet":
+            print("Title of homepage verified")
+            
         self.frameactionpage=frameactions_page(self.driver)
         self.frameactionpage.click_framemenu()
         self.frameactionpage.click_iframemenu()
@@ -26,25 +30,24 @@ class Test_baseclass:
         self.frameactionpage.switch_to_defaultcontent()
         self.driver.back()
         self.driver.back()
-        self.windowhandle=windowhandlepage(self.driver,self.wait)
+
+        self.windowhandle=windowhandlepage(self.driver)
         self.windowhandle.click_newtableelement()
         self.windowhandle.click_newtableelement2()
         self.windowhandle.switch_to_mainwindow()
 
-        self.alertpage=alertactions_page(self.driver,self.wait)
+        self.alertpage=alertactions_page(self.driver)
         self.alertpage.click_alertmenu()
         self.alertpage.click_JSbutton()
-        self.alertpage.create_alert()
+        self.alertpage.accept_alert()
         self.alertpage.alerttext_comparison()
         self.alertpage.click_confirmbtn()
         self.alertpage.click_promptbutton()
         self.driver.back()
 
-        self.linkpage=linktext_page(self.driver,self.wait)
+        self.linkpage=linktext_page(self.driver)
         self.linkpage.click_linktext()
-        self.driver.back()
         self.linkpage.click_partiallinktext()
-        self.driver.back()
         self.driver.quit()
 
         assert "pass"=="pass", "first test case written in pytest failed"
