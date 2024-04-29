@@ -11,6 +11,7 @@ from pageobjects.windowhandlepage import windowhandlepage
 from pageobjects.alertactions_page import alertactions_page
 from pageobjects.linktext_page import linktext_page
 from pageobjects.basepage import basepage
+from pageobjects.freshservice_loginpage import freshservice_loginpage
 
 
 class Test_baseclass:
@@ -48,6 +49,13 @@ class Test_baseclass:
         self.linkpage=linktext_page(self.driver)
         self.linkpage.click_linktext()
         self.linkpage.click_partiallinktext()
+    
+        self.basepagenew.navigate_to_url("https://freshworld-ashdata.freshgenie.com/admin/home")
+        self.driver.maximize_window()
+        self.fpage=freshservice_loginpage(self.driver)
+        self.fpage.login_freshservice()
+        self.fpage.logout_freshservice()
         self.driver.quit()
 
         assert "pass"=="pass", "first test case written in pytest failed"
+
