@@ -18,9 +18,9 @@ class Test_baseclass:
     def test_frame(self):
         self.driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager(driver_version="124.0").install()))
         self.basepagenew=basepage(self.driver)
-        self.basepagenew.navigate_to_url("https://the-internet.herokuapp.com/")
+        #self.basepagenew.navigate_to_url("https://the-internet.herokuapp.com/")
         self.driver.maximize_window()
-        if self.basepagenew.get_title()=="The Internet":
+        '''if self.basepagenew.get_title()=="The Internet":
             print("Title of homepage verified")
             
         self.frameactionpage=frameactions_page(self.driver)
@@ -48,12 +48,14 @@ class Test_baseclass:
 
         self.linkpage=linktext_page(self.driver)
         self.linkpage.click_linktext()
-        self.linkpage.click_partiallinktext()
+        self.linkpage.click_partiallinktext()'''
     
-        self.basepagenew.navigate_to_url("https://freshworld-ashdata.freshgenie.com/admin/home")
+        self.basepagenew.navigate_to_url("https://freshworld-ashdata.freshgenie.com/a/dashboard")
         self.driver.maximize_window()
         self.fpage=freshservice_loginpage(self.driver)
         self.fpage.login_freshservice()
+        self.fpage.click_tickets_link()
+        self.fpage.add_ticket_details()
         self.fpage.logout_freshservice()
         self.driver.quit()
 
