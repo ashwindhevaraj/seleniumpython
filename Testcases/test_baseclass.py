@@ -54,8 +54,11 @@ class Test_baseclass:
         self.driver.maximize_window()
         self.fpage=freshservice_loginpage(self.driver)
         self.fpage.login_freshservice()
-        self.fpage.click_tickets_link()
-        self.fpage.add_ticket_details()
+        self.fpage.click_mainmenu()
+        #self.fpage.add_ticket_details()
+
+        self.fpage.add_majorincident()
+
         self.fpage.logout_freshservice()
         self.driver.quit()
 
