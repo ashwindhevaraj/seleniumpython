@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from Pages.Basepage import BasePage
+from Pages.Dashpage import Dashpage
 
 
 class Loginpage(BasePage):
@@ -17,3 +18,4 @@ class Loginpage(BasePage):
         self.do_send_keys(self.username,"Admin")
         self.do_send_keys(self.password,"admin123")
         self.do_click(self.submitbutton)
+        return Dashpage(self.driver)
