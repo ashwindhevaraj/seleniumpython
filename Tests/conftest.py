@@ -10,20 +10,20 @@ def init__driver(request):
         options = chromeOptions()
         '''options.add_argument("--headless=new")
         options.add_argument('--incognito')'''
-        web_driver=webdriver.Chrome(options=options)
-    if request.param=='firefox':
+        driver=webdriver.Chrome(options=options)
+    elif request.param=='firefox':
         options = firefoxOptions()
         '''options.add_argument('-headless')
         options.add_argument("-private")'''
-        web_driver=webdriver.Firefox(options=options)
-    if request.param=='edge':
+        driver=webdriver.Firefox(options=options)
+    elif request.param=='edge':
         options = edgeOptions()
         '''options.add_argument('--inprivate')
         options.add_argument("--headless=new")'''
-        web_driver=webdriver.Edge(options=options)
-    web_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-    web_driver.implicitly_wait(10)
-    request.cls.driver=web_driver
+        driver=webdriver.Edge(options=options)
+    driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+    driver.implicitly_wait(20)
+    request.cls.driver=driver
     yield
     print("-------------------teardown-----------------")
-    web_driver.close()
+    driver.quit()

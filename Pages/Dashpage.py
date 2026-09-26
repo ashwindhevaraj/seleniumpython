@@ -5,7 +5,7 @@ from Pages.Basepage import BasePage
 
 class Dashpage(BasePage):
     dashboardtext=(By.CSS_SELECTOR,"[class='oxd-topbar-header-breadcrumb']")
-    usernameclick = (By.XPATH,"//p[text()='manda user']")
+    usernameclick = (By.CSS_SELECTOR,"p[class=oxd-userdropdown-name]")
     def __init__(self,driver):
         super().__init__(driver)
 
